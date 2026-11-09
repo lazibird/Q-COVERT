@@ -1,0 +1,4 @@
+# Shared offline preparation and integration-test environment (Python 3.12).
+numpy==2.5.3
+faiss-cpu==1.15.1
+mkl-devel==2025.3.0

@@ -1,0 +1,62 @@
+enclave {
+    from "sgx_tstdc.edl" import *;
+    from "sgx_pthread.edl" import *;
+
+    trusted {
+        public uint32_t bison_sgx_benchmark([user_check] void* host_state,
+            [in, size=input_size] const uint8_t* input, size_t input_size,
+            [out, size=output_capacity] uint8_t* output, size_t output_capacity,
+            [out] size_t* written, [out] uint32_t* snapshot_status);
+        public uint32_t compass_sgx_benchmark([user_check] void* host_state,
+            [in, size=input_size] const uint8_t* input, size_t input_size,
+            [out, size=output_capacity] uint8_t* output, size_t output_capacity,
+            [out] size_t* written, [out] uint32_t* snapshot_status);
+        public uint32_t qcovert_sgx_benchmark([user_check] void* host_state,
+            [in, size=input_size] const uint8_t* input, size_t input_size,
+            [out, size=output_capacity] uint8_t* output, size_t output_capacity,
+            [out] size_t* written, [out] uint32_t* snapshot_status);
+        public uint32_t qcovert_sgx_setup([user_check] void* host_state,
+            [in, size=input_size] const uint8_t* input, size_t input_size,
+            [out, size=output_capacity] uint8_t* output, size_t output_capacity);
+        public uint32_t qcovert_sgx_evict([user_check] void* host_state,
+            [in, size=input_size] const uint8_t* input, size_t input_size,
+            [out, size=output_capacity] uint8_t* output, size_t output_capacity);
+        public uint32_t sonic_sgxbridge_threadpool_worker_entry(uint64_t pool_id, uint32_t worker_index);
+        public uint32_t ringdoram_sgx_run([user_check] void* host_state);
+    };
+
+    untrusted {
+        void qcovert_benchmark_time_ns([out] uint64_t* nanoseconds);
+        void qcovert_benchmark_progress([user_check] void* host_state, [in, string] const char* stage,
+            uint64_t completed, uint64_t total);
+        size_t qcovert_snapshot_read([user_check] void* host_state, [out, size=size] uint8_t* bytes, size_t size);
+        uint32_t qcovert_snapshot_write([user_check] void* host_state, [in, size=size] const uint8_t* bytes,
+            size_t size);
+        uint32_t qcovert_snapshot_commit([user_check] void* host_state);
+        uint32_t qcovert_report_write([user_check] void* host_state, [in, size=size] const uint8_t* bytes,
+            size_t size);
+        void qcovert_allocate([out] uint64_t* address, size_t bytes);
+        void qcovert_release([user_check] void* address);
+        sgx_status_t sonic_sgxbridge_log_sink([user_check] void* host_state, [in, string] const char* message);
+        sgx_status_t sonic_sgxbridge_calculate_cycle_scale([user_check] void* host_state, [out] double* ns_per_cycle);
+        sgx_status_t sonic_sgxbridge_sleep_ms([user_check] void* host_state, uint32_t millis);
+        sgx_status_t sonic_sgxbridge_query_time_ns([user_check] void* host_state, [out] uint64_t* out_nanoseconds);
+
+        sgx_status_t sonic_sgxbridge_threadpool_host_create(
+            [user_check] void* host_state,
+            uint64_t pool_id,
+            uint32_t worker_count,
+            uint32_t queue_capacity,
+            uint32_t queue_policy,
+            [out] void** out_handshake,
+            [out] uint32_t* out_status,
+            [out] uint32_t* out_detail
+        );
+        sgx_status_t sonic_sgxbridge_threadpool_host_destroy(
+            [user_check] void* host_state,
+            uint64_t pool_id,
+            [out] uint32_t* out_status,
+            [out] uint32_t* out_detail
+        );
+    };
+};

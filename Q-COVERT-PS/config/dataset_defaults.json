@@ -1,0 +1,263 @@
+{
+  "datasets": {
+    "SIFT": {
+      "files": {
+        "base": "data/sift/sift_base.fvecs",
+        "query": "data/sift/sift_query.fvecs",
+        "groundtruth": "data/sift/sift_groundtruth.ivecs"
+      },
+      "data": {
+        "storage_scalar": "uint8"
+      },
+      "clustering": {
+        "initial_clusters": 4096,
+        "size_multiplier_ratio": [
+          6,
+          5
+        ],
+        "seed": 42,
+        "iterations": 20
+      },
+      "query": {
+        "nprobe": 100,
+        "k2": 200,
+        "k": 10,
+        "candidate_selection": {
+          "mode": "exact",
+          "rank_fractions": []
+        }
+      },
+      "oram": {
+        "Z": 32,
+        "A": 46,
+        "S": 58,
+        "qu": {
+          "R": 3,
+          "E": 1
+        },
+        "fu": {
+          "R": 3,
+          "E": 1
+        },
+        "stash_blocks": 0
+      },
+      "execution": {
+        "access_threads": 32,
+        "sgx_heap_bytes": 10737418240
+      },
+      "benchmark": {
+        "warmup": 10,
+        "queries": 100,
+        "repeats": 1
+      }
+    },
+    "SIFT10M": {
+      "files": {
+        "base": "data/sift10M/base.bin",
+        "query": "data/sift10M/sift10m_query.fvecs",
+        "groundtruth": "data/sift10M/sift10m_groundtruth.ivecs"
+      },
+      "data": {
+        "storage_scalar": "uint8"
+      },
+      "clustering": {
+        "initial_clusters": 8192,
+        "size_multiplier_ratio": [
+          6,
+          5
+        ],
+        "seed": 42,
+        "iterations": 20,
+        "precomputed_labels": "data/sift10M/sift10M_cluster_id_8192.ivecs",
+        "precomputed_centroids": "data/sift10M/sift10M_centroid_8192.fvecs"
+      },
+      "query": {
+        "nprobe": 100,
+        "k2": 200,
+        "k": 10,
+        "candidate_selection": {
+          "mode": "exact",
+          "rank_fractions": []
+        }
+      },
+      "oram": {
+        "Z": 32,
+        "A": 46,
+        "S": 58,
+        "qu": {
+          "R": 4,
+          "E": 1
+        },
+        "fu": {
+          "R": 3,
+          "E": 1
+        },
+        "stash_blocks": 0
+      },
+      "execution": {
+        "access_threads": 32,
+        "sgx_heap_bytes": 47244640256
+      },
+      "benchmark": {
+        "warmup": 10,
+        "queries": 100,
+        "repeats": 1
+      }
+    },
+    "SIFT100M": {
+      "files": {
+        "base": "data/sift100M/base.bin",
+        "query": "data/sift100M/sift100m_query.fvecs",
+        "groundtruth": "data/sift100M/sift100m_groundtruth.ivecs"
+      },
+      "data": {
+        "storage_scalar": "uint8"
+      },
+      "clustering": {
+        "initial_clusters": 65536,
+        "size_multiplier_ratio": [
+          6,
+          5
+        ],
+        "seed": 42,
+        "iterations": 20,
+        "precomputed_labels": "data/sift100M/sift100M_cluster_id_65536.ivecs",
+        "precomputed_centroids": "data/sift100M/sift100M_centroid_65536.fvecs"
+      },
+      "query": {
+        "nprobe": 100,
+        "k2": 200,
+        "k": 10,
+        "candidate_selection": {
+          "mode": "exact",
+          "rank_fractions": []
+        }
+      },
+      "oram": {
+        "Z": 32,
+        "A": 46,
+        "S": 58,
+        "qu": {
+          "R": 5,
+          "E": 1
+        },
+        "fu": {
+          "R": 3,
+          "E": 1
+        },
+        "stash_blocks": 0
+      },
+      "execution": {
+        "access_threads": 32,
+        "sgx_heap_bytes": 206158430208
+      },
+      "benchmark": {
+        "warmup": 10,
+        "queries": 100,
+        "repeats": 1
+      }
+    },
+    "DEEP1M": {
+      "files": {
+        "base": "data/deep1M/base.bin",
+        "query": "data/deep1M/deep1m_query.fvecs",
+        "groundtruth": "data/deep1M/deep1m_groundtruth.ivecs"
+      },
+      "data": {
+        "storage_scalar": "float32"
+      },
+      "clustering": {
+        "initial_clusters": 4096,
+        "size_multiplier_ratio": [
+          6,
+          5
+        ],
+        "seed": 42,
+        "iterations": 20
+      },
+      "query": {
+        "nprobe": 100,
+        "k2": 200,
+        "k": 10,
+        "candidate_selection": {
+          "mode": "exact",
+          "rank_fractions": []
+        }
+      },
+      "oram": {
+        "Z": 32,
+        "A": 46,
+        "S": 58,
+        "qu": {
+          "R": 3,
+          "E": 1
+        },
+        "fu": {
+          "R": 3,
+          "E": 1
+        },
+        "stash_blocks": 0
+      },
+      "execution": {
+        "access_threads": 32,
+        "sgx_heap_bytes": 10737418240
+      },
+      "benchmark": {
+        "warmup": 10,
+        "queries": 100,
+        "repeats": 1
+      }
+    },
+    "MSMARCO1M": {
+      "files": {
+        "base": "data/msmarco1m/base.bin",
+        "query": "data/msmarco1m/query.bin",
+        "groundtruth": "data/msmarco1m/gt.bin"
+      },
+      "data": {
+        "storage_scalar": "float32"
+      },
+      "clustering": {
+        "initial_clusters": 4096,
+        "size_multiplier_ratio": [
+          6,
+          5
+        ],
+        "seed": 42,
+        "iterations": 20
+      },
+      "query": {
+        "nprobe": 100,
+        "k2": 200,
+        "k": 10,
+        "candidate_selection": {
+          "mode": "exact",
+          "rank_fractions": []
+        }
+      },
+      "oram": {
+        "Z": 32,
+        "A": 46,
+        "S": 58,
+        "qu": {
+          "R": 3,
+          "E": 1
+        },
+        "fu": {
+          "R": 3,
+          "E": 1
+        },
+        "stash_blocks": 0
+      },
+      "execution": {
+        "access_threads": 32,
+        "sgx_heap_bytes": 34359738368
+      },
+      "benchmark": {
+        "warmup": 10,
+        "queries": 100,
+        "repeats": 1
+      }
+    }
+  }
+}

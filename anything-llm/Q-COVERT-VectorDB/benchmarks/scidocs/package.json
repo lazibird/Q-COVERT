@@ -1,0 +1,12 @@
+{
+  "name": "qcovert-scidocs-benchmark",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "prepare": "node prepare_embeddings.mjs",
+    "ground-truth": "../../.venv/bin/python prepare_ground_truth.py",
+    "load:lance": "node load_lancedb.mjs",
+    "load:qcovert": "node load_qcovert.mjs",
+    "benchmark": "node benchmark.mjs"
+  }
+}

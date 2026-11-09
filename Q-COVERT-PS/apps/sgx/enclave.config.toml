@@ -1,0 +1,16 @@
+[enclave]
+prod_id = 0
+isv_svn = 0
+debug = true
+misc_select = 0
+
+[mem]
+heap_min_size = "128M"
+heap_init_size = "128M"
+heap_max_size = "128M"
+stack_min_size = "16M"
+stack_max_size = "16M"
+
+[threads]
+num_tcs = 64
+tcs_policy = 0

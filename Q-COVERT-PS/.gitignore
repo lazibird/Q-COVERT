@@ -1,0 +1,57 @@
+# CMake build directories and local configuration
+/build/
+/build-*/
+/cmake-build-*/
+/install/
+CMakeFiles/
+CMakeCache.txt
+CMakeUserPresets.json
+cmake_install.cmake
+CTestTestfile.cmake
+compile_commands.json
+
+# Build artifacts
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dll
+*.dylib
+*.exe
+
+# Datasets, offline caches, ORAM snapshots, and experiment outputs
+/data/
+/results/
+initial_oram.*.state
+initial_oram.*.state.pending
+initial_oram.*.lock
+filelist.txt
+
+# Python virtual environments and caches
+/.venv/
+/venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+serverchan.py
+
+# LaTeX intermediate files; paper PDFs and TeX sources are not ignored by extension
+*.aux
+*.bbl
+*.blg
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+*.log
+
+# Local editor settings and temporary files
+/.vscode/
+/.idea/
+*.swp
+*.swo
+*~
+.DS_Store

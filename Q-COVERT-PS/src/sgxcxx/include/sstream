@@ -1,0 +1,92 @@
+#pragma once
+
+#include <string>
+#include <string_view>
+#include <type_traits>
+
+namespace std {
+
+inline namespace __1 {
+
+template <class CharT, class Traits, class Allocator>
+class basic_ostringstream {
+  static_assert(std::is_same_v<CharT, char>, "basic_ostringstream only supports char in this SGX shim");
+
+public:
+  basic_ostringstream() = default;
+  ~basic_ostringstream() = default;
+
+  std::string str() const {
+    return buffer_;
+  }
+
+  void str(const std::string& value) {
+    buffer_ = value;
+  }
+
+  basic_ostringstream& write(const char* data, std::size_t count) {
+    if (data != nullptr && count > 0) {
+      buffer_.append(data, count);
+    }
+    return *this;
+  }
+
+  basic_ostringstream& put(char value) {
+    buffer_.push_back(value);
+    return *this;
+  }
+
+  basic_ostringstream& operator<<(const char* value) {
+    if (value != nullptr) {
+      buffer_.append(value);
+    }
+    return *this;
+  }
+
+  basic_ostringstream& operator<<(const std::string& value) {
+    buffer_.append(value);
+    return *this;
+  }
+
+  basic_ostringstream& operator<<(std::string_view value) {
+    buffer_.append(value.data(), value.size());
+    return *this;
+  }
+
+  basic_ostringstream& operator<<(char value) {
+    buffer_.push_back(value);
+    return *this;
+  }
+
+  basic_ostringstream& operator<<(bool value) {
+    return *this << (value ? "true" : "false");
+    return *this;
+  }
+
+  template <class T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
+  basic_ostringstream& operator<<(T value) {
+    if constexpr (std::is_signed_v<T>) {
+      buffer_.append(std::to_string(static_cast<long long>(value)));
+    } else {
+      buffer_.append(std::to_string(static_cast<unsigned long long>(value)));
+    }
+    return *this;
+  }
+
+  template <class T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+  basic_ostringstream& operator<<(T value) {
+    buffer_.append(std::to_string(static_cast<long double>(value)));
+    return *this;
+  }
+
+private:
+  std::string buffer_;
+};
+
+using ostringstream = basic_ostringstream<char, std::char_traits<char>, std::allocator<char>>;
+
+} // namespace __1
+
+using __1::ostringstream;
+
+} // namespace std

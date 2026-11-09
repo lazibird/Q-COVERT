@@ -1,0 +1,10 @@
+{
+  "SEAL": {
+    "repository": "https://github.com/Clive2312/SEAL",
+    "commit": "ab7ae90b35f7752a2d2b0ec5c654bee642fc4a55"
+  },
+  "faiss": {
+    "repository": "https://github.com/Clive2312/faiss",
+    "commit": "12efbe30161098fee3e677579334ed2e18085b6c"
+  }
+}

@@ -1,0 +1,36 @@
+/data/*
+!/data/README.md
+!/data/*.py
+!/data/*.sh
+!/data/tests/
+/data/tests/*
+!/data/tests/*.py
+!/data/search_params/
+/data/search_params/*
+!/data/search_params/*.csv
+*.pdf
+
+# Generated build trees, including standalone builds in scheme directories.
+build/
+build-*/
+cmake-build-*/
+CMakeFiles/
+CMakeCache.txt
+CTestTestfile.cmake
+cmake_install.cmake
+compile_commands.json
+
+# Checkout-local dependency installations and caches.
+.deps/
+.venv/
+venv/
+node_modules/
+.cache/
+
+# Local agent and cloud configuration.
+/.agents/
+/.codex/
+/.aws/
+
+__pycache__/
+*.py[cod]

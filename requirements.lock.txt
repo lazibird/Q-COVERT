@@ -1,0 +1,13 @@
+faiss-cpu==1.15.1
+intel-cmplr-lib-ur==2025.3.3
+intel-openmp==2025.3.3
+mkl==2025.3.0
+mkl-devel==2025.3.0
+mkl-include==2025.3.0
+numpy==2.5.3
+onemkl-license==2025.3.0
+packaging==26.3
+tbb==2022.3.1
+tbb-devel==2022.3.1
+tcmlib==1.6.0
+umf==1.0.3

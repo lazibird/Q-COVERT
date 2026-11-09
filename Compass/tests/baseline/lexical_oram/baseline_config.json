@@ -1,0 +1,25 @@
+{
+    "trip": {
+        "base_size": 1523871,
+        "bucket_size": 3,
+        "block_size": 5,
+        "dim": 768,
+        "keyword_len": 772094,
+        "tfidf_score_path": "../data/dataset/tfidf/tfidf_trip.score.bin",
+        "tfidf_query_path": "../data/dataset/tfidf/tfidf_trip.query.ivecs",
+        "buckets_path": "../data/snap/tfidf_trip/buckets.bin",
+        "pos_map_path": "../data/snap/tfidf_trip/position_map.bin"
+    },
+
+    "msmarco": {
+        "base_size": 8388608,
+        "bucket_size": 3,
+        "block_size": 5,
+        "dim": 768,
+        "keyword_len": 1624519,
+        "tfidf_score_path": "../data/dataset/tfidf/tfidf_msmarco.score.bin",
+        "tfidf_query_path": "../data/dataset/tfidf/tfidf_msmarco.query.ivecs",
+        "buckets_path": "../data/snap/tfidf_msmarco/buckets.bin",
+        "pos_map_path": "../data/snap/tfidf_msmarco/position_map.bin"
+    }
+}

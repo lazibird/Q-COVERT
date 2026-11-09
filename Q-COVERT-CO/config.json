@@ -1,0 +1,176 @@
+{
+  "default_dataset": "sift",
+  "defaults": {
+    "preprocess": {
+      "bits": 128,
+      "assign_index": "exact",
+      "kmeans_assign_index": "exact",
+      "kmeans_niter": 25,
+      "kmeans_nredo": 2,
+      "train_sample_ratio": 1.0,
+      "chunk_size": 65536,
+      "cpu_threads": 0,
+      "faiss_threads": 0,
+      "hnsw_m": 32,
+      "hnsw_ef_construction": 200,
+      "hnsw_ef_search": 64,
+      "size_max": 0,
+      "seed": 0,
+      "zero_norm_x0": 0.8
+    },
+    "build_index": {},
+    "query": {
+      "k": 10,
+      "nprobe": 100,
+      "nqueries": 100,
+      "path_batch_clusters": 0,
+      "ring_z": 32,
+      "ring_s": 58,
+      "ring_a": 46,
+      "seed": 20260623,
+      "net_sim": "fast",
+      "net_bandwidth_mbps": -1.0,
+      "net_rtt_ms": -1.0,
+      "net_no_sleep": true,
+      "metadata_storage": "server",
+      "exact_payload": "auto"
+    }
+  },
+  "datasets": {
+    "siftsmall": {
+      "source": "../data/siftsmall",
+      "clusters": 48,
+      "preprocess": {
+        "assign_index": "exact",
+        "kmeans_assign_index": "exact",
+        "kmeans_niter": 25
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 10,
+        "nqueries": 100
+      }
+    },
+    "sift": {
+      "source": "../data/sift",
+      "clusters": 4096,
+      "preprocess": {
+        "assign_index": "exact",
+        "kmeans_assign_index": "exact",
+        "kmeans_niter": 25
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100
+      },
+      "files": {
+        "base": "sift_base.fvecs",
+        "query": "sift_query.fvecs",
+        "groundtruth": "sift_groundtruth.ivecs"
+      }
+    },
+    "deep1M": {
+      "source": "../data/deep1M",
+      "clusters": 4096,
+      "preprocess": {
+        "bits": 128,
+        "assign_index": "exact",
+        "kmeans_assign_index": "exact",
+        "kmeans_niter": 25
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100,
+        "exact_payload": "raw_float32"
+      },
+      "files": {
+        "base": "base.bin",
+        "query": "deep1m_query.fvecs",
+        "groundtruth": "deep1m_groundtruth.ivecs"
+      }
+    },
+    "msmarco1m": {
+      "source": "../data/msmarco1m",
+      "clusters": 4096,
+      "preprocess": {
+        "bits": 768,
+        "assign_index": "exact",
+        "kmeans_assign_index": "exact",
+        "kmeans_niter": 25
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100,
+        "exact_payload": "raw_float32"
+      },
+      "files": {
+        "base": "base.bin",
+        "query": "query.bin",
+        "groundtruth": "gt.bin"
+      }
+    },
+    "sift10M": {
+      "source": "../data/sift10M",
+      "clusters": 8192,
+      "train": "../data/sift10M/base.bin",
+      "preprocess": {
+        "assign_index": "hnsw",
+        "kmeans_assign_index": "hnsw",
+        "kmeans_niter": 20,
+        "train_sample_ratio": 1.0
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100,
+        "exact_payload": "raw_uint8"
+      },
+      "files": {
+        "base": "base.bin",
+        "query": "sift10m_query.fvecs",
+        "groundtruth": "sift10m_groundtruth.ivecs"
+      }
+    },
+    "sift100M": {
+      "source": "../data/sift100M",
+      "clusters": 65536,
+      "train": "../data/sift100M/base.bin",
+      "preprocess": {
+        "assign_index": "hnsw",
+        "kmeans_assign_index": "hnsw",
+        "kmeans_niter": 20,
+        "train_sample_ratio": 0.2
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100,
+        "exact_payload": "raw_uint8"
+      },
+      "files": {
+        "base": "base.bin",
+        "query": "sift100m_query.fvecs",
+        "groundtruth": "sift100m_groundtruth.ivecs"
+      }
+    },
+    "sift1B": {
+      "source": "../data/sift1B",
+      "clusters": 65536,
+      "train": "../data/sift1B/bigann_learn.bvecs",
+      "preprocess": {
+        "assign_index": "hnsw",
+        "kmeans_assign_index": "hnsw",
+        "kmeans_niter": 20
+      },
+      "build_index": {},
+      "query": {
+        "nprobe": 100,
+        "nqueries": 100,
+        "exact_payload": "raw_uint8"
+      }
+    }
+  }
+}

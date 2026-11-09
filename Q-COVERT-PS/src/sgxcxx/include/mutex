@@ -1,0 +1,234 @@
+#pragma once
+
+#include <errno.h>
+#include <pthread.h>
+#include <cstdlib>
+#include <utility>
+
+namespace std {
+
+struct defer_lock_t {
+  explicit constexpr defer_lock_t(int) {}
+};
+
+struct try_to_lock_t {
+  explicit constexpr try_to_lock_t(int) {}
+};
+
+struct adopt_lock_t {
+  explicit constexpr adopt_lock_t(int) {}
+};
+
+inline constexpr defer_lock_t defer_lock{0};
+inline constexpr try_to_lock_t try_to_lock{0};
+inline constexpr adopt_lock_t adopt_lock{0};
+
+class mutex {
+public:
+  mutex() noexcept {
+    const int rc = pthread_mutex_init(&native_, nullptr);
+    if (rc != 0) {
+      abort();
+    }
+  }
+
+  ~mutex() {
+    const int rc = pthread_mutex_destroy(&native_);
+    if (rc != 0) {
+      abort();
+    }
+  }
+
+  mutex(const mutex&) = delete;
+  mutex& operator=(const mutex&) = delete;
+
+  void lock() noexcept {
+    const int rc = pthread_mutex_lock(&native_);
+    if (rc != 0) {
+      abort();
+    }
+  }
+
+  bool try_lock() noexcept {
+    const int rc = pthread_mutex_trylock(&native_);
+    if (rc == 0) {
+      return true;
+    }
+    if (rc == EBUSY) {
+      return false;
+    }
+    abort();
+  }
+
+  void unlock() noexcept {
+    const int rc = pthread_mutex_unlock(&native_);
+    if (rc != 0) {
+      abort();
+    }
+  }
+
+  using native_handle_type = pthread_mutex_t*;
+
+  native_handle_type native_handle() noexcept { return &native_; }
+
+private:
+  pthread_mutex_t native_{};
+};
+
+template <class Mutex>
+class lock_guard {
+public:
+  explicit lock_guard(Mutex& mutex) noexcept : mutex_(mutex) { mutex_.lock(); }
+
+  lock_guard(const lock_guard&) = delete;
+  lock_guard& operator=(const lock_guard&) = delete;
+
+  ~lock_guard() { mutex_.unlock(); }
+
+private:
+  Mutex& mutex_;
+};
+
+template <class Mutex>
+class unique_lock {
+public:
+  using mutex_type = Mutex;
+
+  unique_lock() noexcept = default;
+
+  explicit unique_lock(mutex_type& mutex) noexcept : mutex_(&mutex), owns_(false) { lock(); }
+
+  unique_lock(mutex_type& mutex, defer_lock_t) noexcept : mutex_(&mutex), owns_(false) {}
+
+  unique_lock(mutex_type& mutex, adopt_lock_t) noexcept : mutex_(&mutex), owns_(true) {}
+
+  unique_lock(mutex_type& mutex, try_to_lock_t) noexcept : mutex_(&mutex), owns_(false) {
+    owns_ = mutex_->try_lock();
+  }
+
+  unique_lock(const unique_lock&) = delete;
+  unique_lock& operator=(const unique_lock&) = delete;
+
+  unique_lock(unique_lock&& other) noexcept : mutex_(other.mutex_), owns_(other.owns_) {
+    other.mutex_ = nullptr;
+    other.owns_ = false;
+  }
+
+  unique_lock& operator=(unique_lock&& other) noexcept {
+    if (this != &other) {
+      if (owns_) {
+        mutex_->unlock();
+      }
+      mutex_ = other.mutex_;
+      owns_ = other.owns_;
+      other.mutex_ = nullptr;
+      other.owns_ = false;
+    }
+    return *this;
+  }
+
+  ~unique_lock() {
+    if (owns_ && mutex_ != nullptr) {
+      mutex_->unlock();
+    }
+  }
+
+  void lock() {
+    if (mutex_ == nullptr) {
+      abort();
+    }
+    mutex_->lock();
+    owns_ = true;
+  }
+
+  bool try_lock() {
+    if (mutex_ == nullptr) {
+      abort();
+    }
+    owns_ = mutex_->try_lock();
+    return owns_;
+  }
+
+  void unlock() {
+    if (!owns_ || mutex_ == nullptr) {
+      return;
+    }
+    mutex_->unlock();
+    owns_ = false;
+  }
+
+  bool owns_lock() const noexcept { return owns_; }
+  explicit operator bool() const noexcept { return owns_; }
+
+  mutex_type* mutex() const noexcept { return mutex_; }
+
+  mutex_type* release() noexcept {
+    mutex_type* current = mutex_;
+    mutex_ = nullptr;
+    owns_ = false;
+    return current;
+  }
+
+private:
+  mutex_type* mutex_ = nullptr;
+  bool owns_ = false;
+};
+
+struct once_flag {
+  pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
+  pthread_cond_t cond = PTHREAD_COND_INITIALIZER;
+  bool completed = false;
+  bool in_progress = false;
+};
+
+template <class Callable, class... Args>
+void call_once(once_flag& flag, Callable&& callable, Args&&... args) {
+  if (pthread_mutex_lock(&flag.mutex) != 0) {
+    abort();
+  }
+
+  while (flag.in_progress) {
+    if (pthread_cond_wait(&flag.cond, &flag.mutex) != 0) {
+      pthread_mutex_unlock(&flag.mutex);
+      abort();
+    }
+  }
+
+  if (flag.completed) {
+    pthread_mutex_unlock(&flag.mutex);
+    return;
+  }
+
+  flag.in_progress = true;
+  if (pthread_mutex_unlock(&flag.mutex) != 0) {
+    abort();
+  }
+
+  bool succeeded = false;
+  try {
+    callable(std::forward<Args>(args)...);
+    succeeded = true;
+  } catch (...) {
+    if (pthread_mutex_lock(&flag.mutex) == 0) {
+      flag.in_progress = false;
+      pthread_cond_broadcast(&flag.cond);
+      pthread_mutex_unlock(&flag.mutex);
+    }
+    throw;
+  }
+
+  if (pthread_mutex_lock(&flag.mutex) != 0) {
+    abort();
+  }
+  flag.completed = succeeded;
+  flag.in_progress = false;
+  if (pthread_cond_broadcast(&flag.cond) != 0) {
+    pthread_mutex_unlock(&flag.mutex);
+    abort();
+  }
+  if (pthread_mutex_unlock(&flag.mutex) != 0) {
+    abort();
+  }
+}
+
+} // namespace std

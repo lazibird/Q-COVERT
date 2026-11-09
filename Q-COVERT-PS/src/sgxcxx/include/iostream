@@ -1,0 +1,112 @@
+#pragma once
+
+#ifndef _LIBCPP_IOSTREAM
+#define _LIBCPP_IOSTREAM
+#endif
+#ifndef _LIBCPP_OSTREAM
+#define _LIBCPP_OSTREAM
+#endif
+
+#include <string>
+#include <string_view>
+#include <type_traits>
+
+extern "C" void snsgxcxx_stream_sink(const char*);
+
+namespace std {
+
+inline namespace __1 {
+
+template <class CharT, class Traits>
+class basic_ostream {
+  static_assert(std::is_same_v<CharT, char>, "basic_ostream only supports char in this SGX shim");
+
+public:
+  using char_type = CharT;
+
+  basic_ostream() = default;
+  ~basic_ostream() { flush(); }
+
+  basic_ostream& operator<<(const char* value) {
+    if (value != nullptr) {
+      buffer_.append(value);
+    }
+    return *this;
+  }
+
+  basic_ostream& operator<<(const std::string& value) {
+    buffer_.append(value);
+    return *this;
+  }
+
+  basic_ostream& operator<<(std::string_view value) {
+    buffer_.append(value.data(), value.size());
+    return *this;
+  }
+
+  basic_ostream& operator<<(char value) {
+    buffer_.push_back(value);
+    return *this;
+  }
+
+  basic_ostream& operator<<(bool value) {
+    return *this << (value ? "true" : "false");
+  }
+
+  template <class T, std::enable_if_t<std::is_integral_v<T> && !std::is_same_v<T, bool>, int> = 0>
+  basic_ostream& operator<<(T value) {
+    if constexpr (std::is_signed_v<T>) {
+      buffer_.append(std::to_string(static_cast<long long>(value)));
+    } else {
+      buffer_.append(std::to_string(static_cast<unsigned long long>(value)));
+    }
+    return *this;
+  }
+
+  template <class T, std::enable_if_t<std::is_floating_point_v<T>, int> = 0>
+  basic_ostream& operator<<(T value) {
+    buffer_.append(std::to_string(static_cast<long double>(value)));
+    return *this;
+  }
+
+  basic_ostream& operator<<(basic_ostream& (*manip)(basic_ostream&)) {
+    return manip(*this);
+  }
+
+  void put(char ch) {
+    buffer_.push_back(ch);
+  }
+
+  basic_ostream& flush() {
+    if (!buffer_.empty()) {
+      snsgxcxx_stream_sink(buffer_.c_str());
+      buffer_.clear();
+    }
+    return *this;
+  }
+
+private:
+  std::string buffer_;
+};
+
+using ostream = basic_ostream<char, std::char_traits<char>>;
+
+inline ostream& endl(ostream& os) {
+    os.put('\n');
+    return os.flush();
+}
+
+inline ostream& flush(ostream& os) {
+    return os.flush();
+}
+
+inline ostream cout{};
+
+} // namespace __1
+
+using __1::cout;
+using __1::endl;
+using __1::flush;
+using __1::ostream;
+
+} // namespace std

@@ -1,0 +1,19 @@
+v-env
+.env
+!.env.example
+
+node_modules
+__pycache__
+v-env
+.DS_Store
+aws_cf_deploy_anything_llm.json
+*.bak
+.idea
+
+# Local research datasets and generated Q-COVERT data
+/scidocs/
+/Q-COVERT-VectorDB/pdf-corpus-v1/
+/Q-COVERT-VectorDB/rebuild-backups/
+/Q-COVERT-VectorDB/benchmarks/scidocs/cache/
+/Q-COVERT-VectorDB/benchmarks/scidocs/data/
+/Q-COVERT-VectorDB/benchmarks/scidocs/results/

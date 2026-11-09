@@ -1,0 +1,66 @@
+{
+  "version": 6,
+  "cmakeMinimumRequired": {
+    "major": 3,
+    "minor": 20,
+    "patch": 0
+  },
+  "configurePresets": [
+    {
+      "name": "native-debug",
+      "displayName": "Native Debug",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/native-debug",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "RINGDORAM_BUILD_TESTS": "ON",
+        "RINGDORAM_BUILD_EXAMPLES": "ON",
+        "RINGDORAM_ENABLE_ORAM_DEBUG": "ON"
+      }
+    },
+    {
+      "name": "native-release",
+      "displayName": "Native Release",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/native-release",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Release",
+        "RINGDORAM_BUILD_TESTS": "ON",
+        "RINGDORAM_BUILD_EXAMPLES": "ON"
+      }
+    },
+    {
+      "name": "native-sanitize",
+      "displayName": "Native ASan + UBSan",
+      "inherits": "native-debug",
+      "binaryDir": "${sourceDir}/build/native-sanitize",
+      "cacheVariables": {
+        "RINGDORAM_ENABLE_SANITIZERS": "ON"
+      }
+    },
+    {
+      "name": "sgx-sim",
+      "displayName": "Intel SGX Simulation",
+      "generator": "Ninja",
+      "binaryDir": "${sourceDir}/build/sgx-sim",
+      "cacheVariables": {
+        "CMAKE_BUILD_TYPE": "Debug",
+        "RINGDORAM_ENABLE_SGX": "ON",
+        "RINGDORAM_SGX_MODE": "SIM",
+        "RINGDORAM_BUILD_TESTS": "ON"
+      }
+    }
+  ],
+  "buildPresets": [
+    { "name": "native-debug", "configurePreset": "native-debug" },
+    { "name": "native-release", "configurePreset": "native-release" },
+    { "name": "native-sanitize", "configurePreset": "native-sanitize" },
+    { "name": "sgx-sim", "configurePreset": "sgx-sim" }
+  ],
+  "testPresets": [
+    { "name": "native-debug", "configurePreset": "native-debug", "output": { "outputOnFailure": true } },
+    { "name": "native-release", "configurePreset": "native-release", "output": { "outputOnFailure": true } },
+    { "name": "native-sanitize", "configurePreset": "native-sanitize", "output": { "outputOnFailure": true } },
+    { "name": "sgx-sim", "configurePreset": "sgx-sim", "output": { "outputOnFailure": true } }
+  ]
+}

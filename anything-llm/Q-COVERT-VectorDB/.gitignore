@@ -1,0 +1,62 @@
+# CMake build output
+/build*/
+/CMakeFiles/
+/CMakeCache.txt
+/cmake_install.cmake
+/CTestTestfile.cmake
+/Makefile
+/Testing/
+/compile_commands.json
+
+# Compiled artifacts
+*.o
+*.obj
+*.a
+*.so
+*.so.*
+*.dylib
+*.dll
+*.exe
+
+# Python environments and caches
+/.venv/
+/venv/
+__pycache__/
+*.py[cod]
+*.pyd
+/.pytest_cache/
+/.mypy_cache/
+/.ruff_cache/
+
+# Local configuration and secrets
+/.env
+/.env.*
+!/.env.example
+*.pem
+*.key
+
+# Q-COVERT runtime state
+/qcovert-data*/
+/storage/
+/pdf-corpus-v1/
+/rebuild-backups/
+*.pdf
+*.jsonl
+*.f32
+/logs/
+*.log
+*.pid
+core.[0-9]*
+
+# Local editor and agent state
+/.agents/
+/.codex/
+/.idea/
+/.vscode/
+*.swp
+*.swo
+*~
+
+# Operating-system metadata
+.DS_Store
+Thumbs.db
