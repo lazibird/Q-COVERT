@@ -1,6 +1,6 @@
 # Q-COVERT
 
-Code for *One Architecture, Two Scenarios: Q-COVERT for Client-Owned and Provider-Served Oblivious Vector Search*. Install and compile the native research implementations
+Code for *Unify Once, Serve Both: Q-COVERT for Client-Owned and Provider-Served Oblivious Vector Search*. Install and compile the native research implementations
 from this directory. Scheme READMEs contain preparation/search commands and
 runtime options. See [QUICKSTART.md](QUICKSTART.md) for dataset download, native
 build, and CSV-driven experiment commands.
