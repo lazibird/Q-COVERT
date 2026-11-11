@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../QUICKSTART.md).
 
-Install and compile using the [root README](../README.md). Run commands from
+Install and compile using [QUICKSTART.md](../QUICKSTART.md). Run commands from
 this directory with the shared environment. The TEE adaptation is separately
 documented in `../Q-COVERT-PS/bison/README.md`.
 

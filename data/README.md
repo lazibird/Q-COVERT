@@ -1,6 +1,6 @@
 # Shared datasets
 
-Install dependencies using the [root README](../README.md). Run the commands
+Install dependencies using [QUICKSTART.md](../QUICKSTART.md#1-install-dependencies). Run the commands
 below from the repository root. The two entry points resolve their default
 `data/` directory relative to the scripts, regardless of the launch directory.
 Downloaded files and generated datasets are excluded from Git.

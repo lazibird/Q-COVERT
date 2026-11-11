@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../../QUICKSTART.md).
 
-Install and compile using the [root README](../../README.md). Commands run from
+Install and compile using [QUICKSTART.md](../../QUICKSTART.md). Commands run from
 `Q-COVERT-PS/`. The original BiSON three-path baseline is in `../../bison/`.
 
 ## Build a dataset index
@@ -13,11 +13,13 @@ Install and compile using the [root README](../../README.md). Commands run from
   --pq-bytes 16 --build-ram-gb 4 --builder ../build/bison/bin/build_disk_index
 ```
 
-The DiskANN builder is installed using the root README. Preparation builds or
+The [DiskANN builder instructions](../../QUICKSTART.md#diskann-builder-for-bison-tee)
+cover installation. Preparation builds or
 reuses Vamana/PQ files, then imports them into
 `../data/prepared/ps/bison/<DATASET>.bin`. SIFT/DEEP1M/MSMARCO1M use float32;
 SIFT10M/100M use uint8. `--cache-depth` is fixed at 0. The runner must match the
-prepared dimension, degree, PQ bytes and scalar (root README build flags).
+prepared dimension, degree, PQ bytes and scalar; see the
+[TEE layout instructions](../../QUICKSTART.md#native-graph-tee-builds-for-other-datasets).
 
 ## Search and plaintext reference
 

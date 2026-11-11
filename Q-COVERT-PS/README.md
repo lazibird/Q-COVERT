@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../QUICKSTART.md).
 
-Install and build using the [repository README](../README.md). Commands below
+Install and build using [QUICKSTART.md](../QUICKSTART.md). Commands below
 run from this directory with the shared Python environment and root build.
 Compass-TEE and BiSON-TEE have separate run guides in their own directories.
 
@@ -29,7 +29,8 @@ ORAM images default to `../data/prepared/ps/qcovert/`; CSV files default to
 
 ## SGX
 
-After building the SIM or HW targets using the root README:
+After building the SIM or HW targets using the
+[SGX build instructions](../QUICKSTART.md#sgx-build):
 
 ```bash
 ../.venv/bin/python tools/benchmark.py --dataset SIFT --mode sgx-sim \
@@ -39,7 +40,8 @@ After building the SIM or HW targets using the root README:
 
 For hardware execution, use `--mode sgx-hw` and the HW build directory. SIM
 validates functionality without providing enclave protection. Heap size and
-vector/code dimensions are build settings documented in the root README.
+vector/code dimensions are build settings documented in
+[QUICKSTART.md](../QUICKSTART.md#sgx-build).
 
 ## Options
 

@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../../QUICKSTART.md).
 
-Install and compile using the [root README](../../README.md). Commands below run
+Install and compile using [QUICKSTART.md](../../QUICKSTART.md). Commands below run
 from `Q-COVERT-PS/`. This is the TEE adaptation; the original Compass and its
 low-client-storage path are in `../../Compass/`.
 
@@ -19,7 +19,7 @@ Raw files follow `config/dataset_defaults.json`. Prepared files default to
 `../data/prepared/ps/compass/<DATASET>.full-c.bin`. SIFT/DEEP1M/MSMARCO1M use
 float32 stored vectors; SIFT10M/100M use uint8. The binary layout must match the
 prepared dimension, degree, PQ subspaces/centroids and scalar; build flags are
-listed in the root README.
+listed in the [TEE layout instructions](../../QUICKSTART.md#native-graph-tee-builds-for-other-datasets).
 
 ## Search
 

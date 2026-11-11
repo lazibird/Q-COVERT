@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../QUICKSTART.md).
 
-Install and compile using the [root README](../README.md). Commands below run
+Install and compile using [QUICKSTART.md](../QUICKSTART.md). Commands below run
 from this directory. Executables come from the outer build, `../build/Compass/`.
 The TEE adaptation has a separate guide in `../Q-COVERT-PS/compass/README.md`.
 

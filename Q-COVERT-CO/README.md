@@ -3,7 +3,7 @@
 For the CSV-driven experiment entry points, see the repository
 [quick start](../QUICKSTART.md).
 
-Install and build from the [repository README](../README.md). Run the following
+Install and build using [QUICKSTART.md](../QUICKSTART.md). Run the following
 commands from this directory using the shared environment and root build.
 
 ## Prepare and build an index
