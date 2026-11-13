@@ -1,8 +1,10 @@
-#make 
+#!/usr/bin/env bash
+set -euo pipefail
 
-#scp -i ~/.ssh/id_rsa -r /home/t-yashkunwar/secure_diskann/build/t-yashkunwar@microsoft.com@10.209.224.138:/home/t-yashkunwar/
+: "${REMOTE_USER:?Set REMOTE_USER to the SSH login name}"
+: "${REMOTE_HOST:?Set REMOTE_HOST to the destination host}"
 
-scp -i ~/.ssh/id_rsa -r /home/t-rohanravi/nsd_rohan/new_secure_diskann/build t-rohanravi@microsoft.com@10.209.224.139:/home/t-rohanravi/nsd
+scp -i ~/.ssh/id_rsa -r /home/nsd/new_secure_diskann/build "${REMOTE_USER}@${REMOTE_HOST}:/home/nsd"
 
 
-scp -i ~/.ssh/id_rsa -r /home/t-rohanravi/nsd_rohan/secure_diskann/build t-rohanravi@microsoft.com@10.209.224.139:/home/t-rohanravi/bigann
+scp -i ~/.ssh/id_rsa -r /home/nsd/secure_diskann/build "${REMOTE_USER}@${REMOTE_HOST}:/home/bigann"

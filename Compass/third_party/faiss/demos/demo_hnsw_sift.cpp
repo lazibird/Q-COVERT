@@ -155,7 +155,7 @@ int main() {
     //     printf("[%.3f s] Loading train set\n", elapsed() - t0);
 
     //     size_t nt;
-    //     float* xt = fvecs_read("/home/clive/see/data/dataset//sift/base.fvecs", &d, &nt);
+    //     float* xt = fvecs_read("/home/see/data/dataset//sift/base.fvecs", &d, &nt);
 
     //     printf("[%.3f s] Preparing index \"%s\" d=%ld\n",
     //            elapsed() - t0,
@@ -173,7 +173,7 @@ int main() {
 
     //     pq_index->add(nt, xt);
 
-    //     faiss::write_index(pq_index, "/home/clive/see/data/dataset//sift/pq_full_4.index");
+    //     faiss::write_index(pq_index, "/home/see/data/dataset//sift/pq_full_4.index");
 
     //     delete[] xt;
     //     return 0;
@@ -185,7 +185,7 @@ int main() {
     //     printf("[%.3f s] Loading database\n", elapsed() - t0);
 
     //     size_t nb, d2;
-    //     float* xb = fvecs_read("/home/clive/see/data/dataset/sift/base.fvecs", &d2, &nb);
+    //     float* xb = fvecs_read("/home/see/data/dataset/sift/base.fvecs", &d2, &nb);
     //     d = d2;
     //     assert(d == d2 || !"dataset does not have same dimension as train set");
 
@@ -199,19 +199,19 @@ int main() {
 
     //     index->add(nb, xb);
 
-    //     faiss::write_index(index, "/home/clive/see/data/dataset/sift/hnsw_128_160_2_ip.index");
+    //     faiss::write_index(index, "/home/see/data/dataset/sift/hnsw_128_160_2_ip.index");
     //     delete[] xb;
 
     //     return 0;
     // }
 
-    index = faiss::read_index("/home/clive/see/data/dataset/sift/hnsw_64_80_2_ip.index", 0);
+    index = faiss::read_index("/home/see/data/dataset/sift/hnsw_64_80_2_ip.index", 0);
     d = 128;
 
     // printf("[%.3f s] Loading indices done\n", elapsed() - t0);
     // while(1){
     // }
-    // pq_index = faiss::read_index("/home/clive/see/data/dataset//sift/pq_full_8.index", 0);
+    // pq_index = faiss::read_index("/home/see/data/dataset//sift/pq_full_8.index", 0);
     // ((faiss::IndexHNSW*)index)->set_quantize_storage(pq_index);
 
     size_t nq;
@@ -221,7 +221,7 @@ int main() {
         printf("[%.3f s] Loading queries\n", elapsed() - t0);
 
         size_t d2;
-        xq = fvecs_read("/home/clive/see/data/dataset//sift/query.fvecs", &d2, &nq);
+        xq = fvecs_read("/home/see/data/dataset//sift/query.fvecs", &d2, &nq);
         assert(d == d2 || !"query does not have same dimension as train set");
         printf("[%.3f s] Loaded %ld queries\n", elapsed() - t0, nq);
 
@@ -241,7 +241,7 @@ int main() {
 
         // load ground-truth and convert int to long
         size_t nq2;
-        int* gt_int = ivecs_read("/home/clive/see/data/dataset//sift/gt.ivecs", &k, &nq2);
+        int* gt_int = ivecs_read("/home/see/data/dataset//sift/gt.ivecs", &k, &nq2);
         // assert(nq2 == nq || !"incorrect nb of ground truth entries");
 
         gt = new faiss::idx_t[k * nq];
@@ -303,7 +303,7 @@ int main() {
             for(int i = 0; i < nq*k; i++){
                 result[i] = I[i];
             }
-            ivecs_write("/home/clive/compass/data/dataset/sift/vanilla_10.ivecs", result, k, nq);
+            ivecs_write("/home/compass/data/dataset/sift/vanilla_10.ivecs", result, k, nq);
 
             delete[] I;
             delete[] D;

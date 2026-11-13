@@ -99,7 +99,7 @@ int main() {
         printf("[%.3f s] Loading database\n", elapsed() - t0);
 
         size_t nb, d2;
-        float* xb = fvecs_read("/home/clive/see/data/dataset/laion1m/1k/laion_base.fvecs", &d2, &nb);
+        float* xb = fvecs_read("/home/see/data/dataset/laion1m/1k/laion_base.fvecs", &d2, &nb);
         d = d2;
         assert(d == d2 || !"dataset does not have same dimension as train set");
 
@@ -123,7 +123,7 @@ int main() {
         printf("[%.3f s] Loading queries\n", elapsed() - t0);
 
         size_t d2;
-        xq = fvecs_read("/home/clive/see/data/dataset/laion1m/laion_query.fvecs", &d2, &nq);
+        xq = fvecs_read("/home/see/data/dataset/laion1m/laion_query.fvecs", &d2, &nq);
         assert(d == d2 || !"query does not have same dimension as train set");
     }
 
@@ -152,7 +152,7 @@ int main() {
         }
 
         printf("[%.3f s] Save generate Ground Truth\n", elapsed() - t0);
-        fvecs_write("/home/clive/see/data/dataset/laion1m/1k/gt.ivecs", (float*)gt, k, nq);
+        fvecs_write("/home/see/data/dataset/laion1m/1k/gt.ivecs", (float*)gt, k, nq);
 
         delete[] gt;
         delete[] I;

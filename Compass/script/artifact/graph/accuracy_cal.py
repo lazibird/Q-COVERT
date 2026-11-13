@@ -156,7 +156,7 @@ def compute_mrr_text(passage_file, query_file, qrel_file, result_path):
 
     # loading search result
 
-    # query_result = ivecs_read("/home/clive/see/data/dataset/trip_distilbert/tiptoe_trip.ivecs")
+    # query_result = ivecs_read("/home/see/data/dataset/trip_distilbert/tiptoe_trip.ivecs")
     query_result = ivecs_read(result_path)
 
     return evaluate_mrr(

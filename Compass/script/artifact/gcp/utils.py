@@ -410,7 +410,7 @@ def execute_prepare_commands(cmds, private_key_path, user_name):
 def run_local_command(cmd):
     try:
         print(cmd.split())
-        result = subprocess.Popen(cmd.split(),  cwd="/home/clive/see/build/", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        result = subprocess.Popen(cmd.split(),  cwd="/home/see/build/", stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 
         # Capture output and errors
         stdout, stderr = result.communicate()
@@ -482,7 +482,7 @@ def run_remote_servers(n_servers):
 
     cmds = []
     for i in range(n_servers):
-        cmd = f"cd /home/clive/see/build/ && ./test_compass_tp r=1 ip={server_ip} p={port+2*i} d={dataset}"
+        cmd = f"cd /home/see/build/ && ./test_compass_tp r=1 ip={server_ip} p={port+2*i} d={dataset}"
         cmds.append(cmd)
 
     threads = []
@@ -607,7 +607,7 @@ def run_remote_clients(n_clients):
 
     cmds = []
     for i in range(len(tracers)):
-        cmd = f"cd /home/clive/see/build/ && ./test_compass_tp r=2 ip={server_ip} p={port+2*i} d={dataset}"
+        cmd = f"cd /home/see/build/ && ./test_compass_tp r=2 ip={server_ip} p={port+2*i} d={dataset}"
         cmds.append(cmd)
 
     threads = []

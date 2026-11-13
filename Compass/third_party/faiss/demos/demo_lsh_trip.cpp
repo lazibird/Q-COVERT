@@ -163,7 +163,7 @@ int main() {
         printf("[%.3f s] Loading database\n", elapsed() - t0);
 
         size_t nb, d2;
-        float* xb = fvecs_read("/home/clive/see/data/dataset/trip_distilbert/passages.fvecs", &d2, &nb);
+        float* xb = fvecs_read("/home/see/data/dataset/trip_distilbert/passages.fvecs", &d2, &nb);
         d = d2;
         assert(d == d2 || !"dataset does not have same dimension as train set");
 
@@ -179,12 +179,12 @@ int main() {
             indices.push_back(index);
         }
 
-        // faiss::write_index(index, "/home/clive/see/data/dataset/trip_distilbert/hnsw_48_60_2_ip.index");
+        // faiss::write_index(index, "/home/see/data/dataset/trip_distilbert/hnsw_48_60_2_ip.index");
         // delete[] xb;
         // return 0;
     // }
 
-    // index = faiss::read_index("/home/clive/see/data/dataset/trip_distilbert/hnsw_64_80_2_ip.index", 0);
+    // index = faiss::read_index("/home/see/data/dataset/trip_distilbert/hnsw_64_80_2_ip.index", 0);
     // d = 768;
 
     size_t nq;
@@ -194,7 +194,7 @@ int main() {
         printf("[%.3f s] Loading queries\n", elapsed() - t0);
 
         size_t d2;
-        xq = fvecs_read("/home/clive/see/data/dataset/trip_distilbert/queries.fvecs", &d2, &nq);
+        xq = fvecs_read("/home/see/data/dataset/trip_distilbert/queries.fvecs", &d2, &nq);
         assert(d == d2 || !"query does not have same dimension as train set");
         printf("[%.3f s] Loaded %ld queries\n", elapsed() - t0, nq);
 
@@ -216,7 +216,7 @@ int main() {
 
         // load ground-truth and convert int to long
         size_t nq2;
-        int* gt_int = ivecs_read("/home/clive/see/data/dataset/trip_distilbert/gt_10.ivecs", &k, &nq2);
+        int* gt_int = ivecs_read("/home/see/data/dataset/trip_distilbert/gt_10.ivecs", &k, &nq2);
         assert(nq2 == nq || !"incorrect nb of ground truth entries");
 
         gt = new faiss::idx_t[k * nq];

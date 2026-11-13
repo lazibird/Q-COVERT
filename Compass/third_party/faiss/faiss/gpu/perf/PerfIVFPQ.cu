@@ -26,7 +26,7 @@
 DEFINE_int32(nprobe, 5, "number of coarse centroids to probe");
 DEFINE_int32(k, 3, "final number of closest results returned");
 DEFINE_int32(num_queries, 3, "number of query vectors");
-DEFINE_string(in, "/home/jhj/local/index.out", "index file for input");
+DEFINE_string(in, "/home/local/index.out", "index file for input");
 DEFINE_bool(diff, true, "show exact distance + index output discrepancies");
 DEFINE_bool(use_precomputed, true, "enable or disable precomputed codes");
 DEFINE_bool(float16_lookup, false, "use float16 residual distance tables");

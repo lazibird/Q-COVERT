@@ -9,7 +9,7 @@ import { fileURLToPath } from "node:url";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const corpus = path.join(root, "pdf-corpus-v1");
 const out = path.join(corpus, "summary-v1");
-const server = "/home/hpf/anything-llm/server";
+const server = "/home/anything-llm/server";
 const requireServer = createRequire(path.join(server, "package.json"));
 requireServer("dotenv").config({ path: path.join(server, ".env.development") });
 const { createDeepSeekClient } = requireServer("./utils/AiProviders/deepseek/client");

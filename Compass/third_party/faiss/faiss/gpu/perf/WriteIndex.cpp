@@ -23,7 +23,7 @@ DEFINE_bool(l2, true, "use L2 metric (versus IP metric)");
 DEFINE_bool(ivfflat, false, "use IVF flat encoding");
 
 // For both:
-DEFINE_string(out, "/home/jhj/local/index.out", "index file for output");
+DEFINE_string(out, "/home/local/index.out", "index file for output");
 DEFINE_int32(dim, 128, "vector dimension");
 DEFINE_int32(num_coarse, 100, "number of coarse centroids");
 DEFINE_int32(num, 100000, "total database size");

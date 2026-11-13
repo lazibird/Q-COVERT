@@ -9,7 +9,7 @@ import readline from "node:readline";
 import { pathToFileURL } from "node:url";
 
 const DEFAULT_OUTPUT = path.resolve(import.meta.dirname, "../pdf-corpus-v1");
-const DEFAULT_SERVER = "/home/hpf/anything-llm/server";
+const DEFAULT_SERVER = "/home/anything-llm/server";
 const MODELS = {
   "MintplexLabs/multilingual-e5-small": { documentPrefix: "passage: ", queryPrefix: "query: " },
   "Xenova/all-MiniLM-L6-v2": { documentPrefix: "", queryPrefix: "" },

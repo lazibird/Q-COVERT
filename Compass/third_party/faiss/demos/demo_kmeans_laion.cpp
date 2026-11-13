@@ -234,7 +234,7 @@ int main() {
     size_t max_nodes_per_centroids = 500;
 
     
-    float* xb = fvecs_read("/home/clive/see/data/dataset/laion1m/100k/laion_base.fvecs", &d, &nb);
+    float* xb = fvecs_read("/home/see/data/dataset/laion1m/100k/laion_base.fvecs", &d, &nb);
 
     // Loading Queries
     std::cout << "Loading queries..." << std::endl;
@@ -243,7 +243,7 @@ int main() {
     size_t d2;
     int n_result = 10;
 
-    xq = fvecs_read("/home/clive/see/data/dataset/laion1m/laion_query.fvecs", &d2, &nq);
+    xq = fvecs_read("/home/see/data/dataset/laion1m/laion_query.fvecs", &d2, &nq);
 
     std::cout << "Clustering data: " << std::endl;
     std::cout << "- d: " << d << std::endl;
@@ -280,7 +280,7 @@ int main() {
     faiss::Index* index = faiss::index_factory(d, index_key);
     index->add(n_centroids, centroids);
 
-    faiss::write_index(index, "/home/clive/see/data/dataset/laion1m/100k/cluster_centroids.index");
+    faiss::write_index(index, "/home/see/data/dataset/laion1m/100k/cluster_centroids.index");
 
     int n_dup_cluster = 2;
     faiss::idx_t* i_b = new faiss::idx_t[nb * n_dup_cluster];
@@ -400,7 +400,7 @@ int main() {
 
         // load ground-truth and convert int to long
         size_t nq2;
-        int* gt_int = ivecs_read("/home/clive/see/data/dataset/laion1m/100k/gt.ivecs", &k, &nq2);
+        int* gt_int = ivecs_read("/home/see/data/dataset/laion1m/100k/gt.ivecs", &k, &nq2);
         assert(nq2 == nq || !"incorrect nb of ground truth entries");
 
         gt = new faiss::idx_t[k * nq];
@@ -438,7 +438,7 @@ int main() {
         result[i] = I[i];
     }
 
-    ivecs_write("/home/clive/see/data/dataset/laion1m/100k/cluster_laion.ivecs", result, k, nq);
+    ivecs_write("/home/see/data/dataset/laion1m/100k/cluster_laion.ivecs", result, k, nq);
 
     return 0;
 }

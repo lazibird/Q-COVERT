@@ -1,7 +1,7 @@
 import re
 import matplotlib.pyplot as plt
 
-path = "/home/gcpuser/clive/faiss/build/demos/trip_more.log"
+path = "/home/gcpuser/faiss/build/demos/trip_more.log"
 
 steps = {}
 cnt_visited = {}

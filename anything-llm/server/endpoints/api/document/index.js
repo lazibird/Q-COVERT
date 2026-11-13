@@ -95,7 +95,7 @@ function apiDocumentEndpoints(app) {
                 {
                   "location": "custom-documents/anythingllm.txt-6e8be64c-c162-4b43-9997-b068c0071e8b.json",
                   "name": "anythingllm.txt-6e8be64c-c162-4b43-9997-b068c0071e8b.json",
-                  "url": "file:///Users/tim/Documents/anything-llm/collector/hotdir/anythingllm.txt",
+                  "url": "file:///Users/Documents/anything-llm/collector/hotdir/anythingllm.txt",
                   "title": "anythingllm.txt",
                   "docAuthor": "Unknown",
                   "description": "Unknown",
@@ -225,7 +225,7 @@ function apiDocumentEndpoints(app) {
                 documents: [{
                   "location": "custom-documents/anythingllm.txt-6e8be64c-c162-4b43-9997-b068c0071e8b.json",
                   "name": "anythingllm.txt-6e8be64c-c162-4b43-9997-b068c0071e8b.json",
-                  "url": "file:///Users/tim/Documents/anything-llm/collector/hotdir/anythingllm.txt",
+                  "url": "file:///Users/Documents/anything-llm/collector/hotdir/anythingllm.txt",
                   "title": "anythingllm.txt",
                   "docAuthor": "Unknown",
                   "description": "Unknown",
